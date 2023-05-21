@@ -1,18 +1,17 @@
 import React from "react";
 
 import { USER } from "../../typescript/users";
-import { displayFullName } from "./helper";
 import useApiHook from "../api/useApiHook";
 import { FETCH_FUNCTIONS } from "../api/typescript";
 import LoadingSpinner from "../utils/LoadingSpinner";
 import ErrorHandler from "../utils/ErrorHandler";
+import UserCard from "./UserCard";
+import { NavLink } from "react-router-dom";
 
 const { GET_ALL_USERS } = FETCH_FUNCTIONS;
 
 const DisplayUsers = () => {
   const [{ isError, isLoading, data }] = useApiHook(GET_ALL_USERS);
-
-  console.log(isError, isLoading, data);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -23,15 +22,14 @@ const DisplayUsers = () => {
   }
   return (
     <div className="bg-gradient">
-      <h3>Users</h3>
+      <header className="d-flex justify-content-between">
+        <h3>Users</h3>
+        <NavLink to="/users/create-user" className="btn btn-sm btn-dark">+</NavLink>
+      </header>
       {data.length > 0 && (
-        <ul className="list-unstyled d-flex flex-column justify-content-start">
+        <ul className="list-unstyled d-flex flex-column justify-content-start mb-0">
           {data.map((user: USER) => {
-            return (
-              <li key={user.id} className="bg-white border">
-                {displayFullName(user.data)}
-              </li>
-            );
+            return <UserCard key={user.id} user={user} />;
           })}
         </ul>
       )}

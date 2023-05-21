@@ -1,16 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
-import App from "./App";
+
 import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ROUTES } from "./router/helper";
+import { IconContext } from "react-icons";
 
 const rootElement = document.getElementById("root");
+
+const router = createBrowserRouter(ROUTES);
 
 const root = rootElement && ReactDOM.createRoot(rootElement);
 root &&
   root.render(
     <React.StrictMode>
-      <App />
+      <IconContext.Provider value={{}}>
+        <RouterProvider router={router} />
+      </IconContext.Provider>
     </React.StrictMode>
   );
 

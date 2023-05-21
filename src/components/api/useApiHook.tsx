@@ -1,11 +1,13 @@
 import { useEffect, useReducer } from "react";
 
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../lib/firebase/initFirebase";
+import { db } from "../../lib/firebase/init-firebase";
 import { DATA_ACTIONS, FETCH_FUNCTIONS, INITIAL_DATA } from "./typescript";
+import { FirebaseTypes } from "../../lib/firebase/typescript";
 
 const { FETCH_INITIAL, FETCH_SUCCESS, FETCH_ERROR } = DATA_ACTIONS;
 const { GET_ALL_USERS } = FETCH_FUNCTIONS;
+const { USERS } = FirebaseTypes;
 
 const dataReducer = (
   state: INITIAL_DATA,
@@ -44,7 +46,7 @@ const useApiHook = (type: FETCH_FUNCTIONS) => {
 
   const getAllUsers = async () => {
     dispatch({ type: FETCH_INITIAL });
-    const userCollectionRef = collection(db, "users");
+    const userCollectionRef = collection(db, USERS);
 
     getDocs(userCollectionRef)
       .then((response) => {
