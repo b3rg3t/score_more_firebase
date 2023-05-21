@@ -1,4 +1,6 @@
 import React from "react";
+
+import "../App.scss"
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/layout/navigation/Navigation";
 

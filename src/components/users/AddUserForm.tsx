@@ -1,6 +1,8 @@
 import React from "react";
 
+import { redirect, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
 import { UserForm } from "./helper";
 import DynamicInput from "../forms/DynamicInput";
 import { USER } from "../../typescript/users";
@@ -8,6 +10,8 @@ import { addDoc } from "firebase/firestore";
 import { userCollectionRef } from "../../lib/firebase/firestore.collections";
 
 const AddUserForm = () => {
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     control,
@@ -23,6 +27,7 @@ const AddUserForm = () => {
     })
       .then((response) => {
         console.log(response.id);
+        redirect(`/users`);
       })
       .catch((error) => console.log(error));
   };
@@ -42,8 +47,17 @@ const AddUserForm = () => {
         );
       })}
       <div className="py-2">
-        <button type="submit" className="btn btn-primary btn-sm">
+        <button type="submit" className="btn btn-primary btn-sm me-1">
           Submit
+        </button>
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Cancel
         </button>
       </div>
     </form>

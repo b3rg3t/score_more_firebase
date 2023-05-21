@@ -1,8 +1,9 @@
 import React from "react";
-import DisplayUsers from "../../components/users/DisplayUsers";
 
-const UsersPage = () => {
-  return <DisplayUsers />;
+import RealtimeUserList from "../../components/users/RealtimeUserList";
+
+const UserListPage = () => {
+  return <RealtimeUserList />;
 };
 
-export default UsersPage;
+export default UserListPage;

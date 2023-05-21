@@ -24,12 +24,14 @@ const DisplayUsers = () => {
     <div className="bg-gradient">
       <header className="d-flex justify-content-between">
         <h3>Users</h3>
-        <NavLink to="/users/create-user" className="btn btn-sm btn-dark">+</NavLink>
+        <NavLink to="/users/create-user" className="btn btn-sm btn-dark">
+          +
+        </NavLink>
       </header>
       {data.length > 0 && (
         <ul className="list-unstyled d-flex flex-column justify-content-start mb-0">
-          {data.map((user: USER) => {
-            return <UserCard key={user.id} user={user} />;
+          {data.map((user: USER, index: number) => {
+            return <UserCard key={user.id} user={user} index={index} />;
           })}
         </ul>
       )}

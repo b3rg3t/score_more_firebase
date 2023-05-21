@@ -1,44 +1,63 @@
 import React from "react";
+
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+
 import { USER } from "../../typescript/users";
-import { displayFullName } from "./helper";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { deleteDoc, doc } from "firebase/firestore";
+import { FirebaseTypes } from "../../lib/firebase/typescript";
+import { db } from "../../lib/firebase/init-firebase";
+
+const { USERS } = FirebaseTypes;
 
 interface UserCardProps {
   user: USER;
+  index: number;
 }
 
-const UserCard = ({ user }: UserCardProps) => {
+const UserCard = ({ user, index }: UserCardProps) => {
   const handleDeleteUser = (id: USER["id"]) => {
-    console.log(id);
+    const docRef = doc(db, USERS, id);
+    deleteDoc(docRef)
+      .then()
+      .catch((error) => console.log(error));
   };
 
-  const handleEditUser = (id: USER["id"]) => {};
+  const wrapperStyle = `bg-white rounded border d-flex justify-content-between p-1 ${
+    index === 0 ? "my-1" : "mb-1"
+  }`;
 
   return (
-    <li
-      key={user.id}
-      className="bg-white border d-flex justify-content-between"
-    >
+    <li className={wrapperStyle}>
       <div>
-        <NavLink className="me-1" to={`/users/user/${user.id}`}>
+        <NavLink className="me-1 link-style" to={`/users/user/${user.id}`}>
           {user.data.userName}
         </NavLink>
-        <span>{displayFullName(user.data)}</span>
+        <ul className="list-unstyled d-flex">
+          <small>
+            <li className="me-1">Games: ""</li>
+          </small>
+          <small>
+            <li className="me-1">Won: ""</li>
+          </small>
+          <small>
+            <li className="me-1">Lost: ""</li>
+          </small>
+        </ul>
       </div>
-      <div>
-        <button
-          type="button"
-          className="btn btn-sm btn-primary"
-          onClick={() => handleEditUser(user.id)}
+      <div className="d-flex align-items-start">
+        <Link
+          to={`/users/user/${user.id}/edit`}
+          className="btn btn-sm btn-primary me-1 d-flex align-items-center px-1"
         >
-          Edit
-        </button>
+          <FaEdit />
+        </Link>
         <button
           type="button"
-          className="btn btn-sm btn-danger"
+          className="btn btn-sm btn-danger d-flex px-1"
           onClick={() => handleDeleteUser(user.id)}
         >
-          Delete
+          <FaTrashAlt />
         </button>
       </div>
     </li>

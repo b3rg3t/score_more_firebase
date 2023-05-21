@@ -1,10 +1,11 @@
 import Root, { loader as rootLoader } from "./Root";
 
-import UsersPage from "../pages/users/UsersPage";
+import UserListPage from "../pages/users/UsersPage";
 import UserPage from "../pages/users/UserPage";
 import EditUserPage from "../pages/users/EditUserPage";
 import ErrorPage from "../pages/ErrorPage";
 import CreateUserPage from "../pages/users/CreateUserPage";
+import Home from "../components/home/Home";
 
 const ROUTES: any = [
   {
@@ -14,11 +15,16 @@ const ROUTES: any = [
     loader: rootLoader,
     children: [
       {
+        index: true,
+        element: <Home />,
+        errorElement: <ErrorPage />,
+      },
+      {
         path: "/users",
         children: [
           {
             index: true,
-            element: <UsersPage />,
+            element: <UserListPage />,
             errorElement: <ErrorPage />,
           },
           {
@@ -37,31 +43,6 @@ const ROUTES: any = [
             errorElement: <ErrorPage />,
           },
         ],
-      },
-    ],
-  },
-  {
-    path: "/users",
-    children: [
-      {
-        index: true,
-        element: <UsersPage />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "create-user",
-        element: <CreateUserPage />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "user/:userId",
-        element: <UserPage />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "user/:userId/edit",
-        element: <EditUserPage />,
-        errorElement: <ErrorPage />,
       },
     ],
   },

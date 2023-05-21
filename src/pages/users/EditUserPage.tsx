@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import EditUserForm from "../../components/users/EditUserForm";
+import { useParams } from "react-router-dom";
 
 const EditUserPage = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  let { userId } = useParams();
 
-export default EditUserPage
+  return (
+    <div>
+      <EditUserForm id={userId ? userId : ""} />
+    </div>
+  );
+};
+
+export default EditUserPage;
