@@ -1,40 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../lib/firebase/initFirebase";
+import React from "react";
+
 import { USER } from "../../typescript/users";
 import { displayFullName } from "./helper";
+import useApiHook from "../api/useApiHook";
+import { FETCH_FUNCTIONS } from "../api/typescript";
+import LoadingSpinner from "../utils/LoadingSpinner";
+import ErrorHandler from "../utils/ErrorHandler";
+
+const { GET_ALL_USERS } = FETCH_FUNCTIONS;
 
 const DisplayUsers = () => {
-  const [users, setUsers] = useState([]);
+  const [{ isError, isLoading, data }] = useApiHook(GET_ALL_USERS);
 
-  useEffect(() => {
-    getAllUsers();
-  }, []);
+  console.log(isError, isLoading, data);
 
-  const getAllUsers = () => {
-    const userCollectionRef = collection(db, "users");
-    getDocs(userCollectionRef)
-      .then((response) => {
-        console.log(response);
-        const allUsers: any = response.docs.map((doc) => ({
-          data: doc.data(),
-          id: doc.id,
-        }));
-        console.log(allUsers);
-        setUsers(allUsers);
-      })
-      .catch((error) => console.log(error.message));
-  };
-
-  console.log(users);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  } else if (isError) {
+    return <ErrorHandler isError={isError} />;
+  } else if (!data) {
+    return <></>;
+  }
   return (
-    <div>
+    <div className="bg-gradient">
       <h3>Users</h3>
-      {users.length > 0 && (
+      {data.length > 0 && (
         <ul className="list-unstyled d-flex flex-column justify-content-start">
-          {users.map((user: USER) => {
+          {data.map((user: USER) => {
             return (
-              <li key={user.id} className="badge badge-pill badge-primary">
+              <li key={user.id} className="bg-white border">
                 {displayFullName(user.data)}
               </li>
             );
