@@ -7,6 +7,7 @@ import { Link, NavLink } from "react-router-dom";
 import { deleteDoc, doc } from "firebase/firestore";
 import { FirebaseTypes } from "../../lib/firebase/typescript";
 import { db } from "../../lib/firebase/init-firebase";
+import ProfilePic from "./ProfilePic";
 
 const { USERS } = FirebaseTypes;
 
@@ -29,21 +30,24 @@ const UserCard = ({ user, index }: UserCardProps) => {
 
   return (
     <li className={wrapperStyle}>
-      <div>
-        <NavLink className="me-1 link-style" to={`/users/user/${user.id}`}>
-          {user.data.userName}
-        </NavLink>
-        <ul className="list-unstyled d-flex">
-          <small>
-            <li className="me-1">Games: ""</li>
-          </small>
-          <small>
-            <li className="me-1">Won: ""</li>
-          </small>
-          <small>
-            <li className="me-1">Lost: ""</li>
-          </small>
-        </ul>
+      <div className="d-flex">
+        <ProfilePic width={45} />
+        <div>
+          <NavLink className="me-1 link-style" to={`/users/user/${user.id}`}>
+            {user.data.userName}
+          </NavLink>
+          <ul className="list-unstyled d-flex">
+            <small>
+              <li className="me-1 text-muted">Games: ""</li>
+            </small>
+            <small>
+              <li className="me-1 text-muted">Won: ""</li>
+            </small>
+            <small>
+              <li className="me-1 text-muted">Lost: ""</li>
+            </small>
+          </ul>
+        </div>
       </div>
       <div className="d-flex align-items-start">
         <Link

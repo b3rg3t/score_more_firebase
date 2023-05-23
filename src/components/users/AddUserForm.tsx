@@ -1,6 +1,6 @@
 import React from "react";
 
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { UserForm } from "./helper";
@@ -27,13 +27,16 @@ const AddUserForm = () => {
     })
       .then((response) => {
         console.log(response.id);
-        redirect(`/users`);
+        navigate(`/users`);
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <form className="px-2 bg-info" onSubmit={handleSubmit(handleOnSubmit)}>
+    <form
+      className="px-2 bg-secondary rounded border m-1"
+      onSubmit={handleSubmit(handleOnSubmit)}
+    >
       <h3>Add user</h3>
       {UserForm.map((input) => {
         return (
