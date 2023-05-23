@@ -1,17 +1,21 @@
-import React from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { UserForm } from "./helper";
+import { userFormConfig } from "./helper";
 import DynamicInput from "../forms/DynamicInput";
 import { USER } from "../../typescript/users";
-import { addDoc } from "firebase/firestore";
+import {
+  addDoc,
+  //  updateDoc
+} from "firebase/firestore";
 import { userCollectionRef } from "../../lib/firebase/firestore.collections";
 
-const AddUserForm = () => {
-  const navigate = useNavigate();
+interface UserFormProps {
+  id?: string;
+}
 
+const UserForm = ({ id }: UserFormProps) => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     control,
@@ -20,25 +24,37 @@ const AddUserForm = () => {
   } = useForm<USER["data"]>();
 
   const handleOnSubmit = (data: USER["data"]): void => {
-    addDoc(userCollectionRef, {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      userName: data.userName,
-    })
-      .then((response) => {
-        console.log(response.id);
-        navigate(`/users`);
+    if (id) {
+      //   updateDoc(userCollectionRef, {
+      //     firstName: data.firstName,
+      //     lastName: data.lastName,
+      //     userName: data.userName,
+      //   }).then((response) => {
+      //   console.log(response.id);
+      //   navigate(`/users`);
+      // })
+      // .catch((error) => console.log(error));;
+    } else {
+      addDoc(userCollectionRef, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        userName: data.userName,
       })
-      .catch((error) => console.log(error));
+        .then((response) => {
+          console.log(response.id);
+          navigate(`/users`);
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   return (
     <form
-      className="px-2 bg-secondary rounded border m-1"
+      className="px-2 bg-dark rounded border m-1 text-white"
       onSubmit={handleSubmit(handleOnSubmit)}
     >
-      <h3>Add user</h3>
-      {UserForm.map((input) => {
+      <h3>{id ? "Edit user" : "Add user"}</h3>
+      {userFormConfig.map((input) => {
         return (
           <DynamicInput
             key={input.name}
@@ -67,4 +83,4 @@ const AddUserForm = () => {
   );
 };
 
-export default AddUserForm;
+export default UserForm;

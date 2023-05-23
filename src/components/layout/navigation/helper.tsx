@@ -1,4 +1,4 @@
-import { FaUsers, FaHome } from "react-icons/fa";
+import { FaUsers, FaHome, FaGamepad } from "react-icons/fa";
 
 const navLinks = [
   {
@@ -10,6 +10,11 @@ const navLinks = [
     icon: <FaUsers />,
     label: "Users",
     to: "/users",
+  },
+  {
+    icon: <FaGamepad />,
+    label: "Games",
+    to: "/games",
   },
 ];
 

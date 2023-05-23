@@ -16,5 +16,6 @@ export type ERROR_TYPE = {
 };
 
 export enum FETCH_FUNCTIONS {
-  GET_ALL_USERS = "GET_ALL_USERS",
+  GET_ALL_USERS,
+  GET_USER
 }

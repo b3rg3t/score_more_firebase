@@ -1,6 +1,6 @@
-import Root, { loader as rootLoader } from "./Root";
+import Root, { loader as rootLoader } from "../pages/Root";
 
-import UserListPage from "../pages/users/UsersPage";
+import UserListPage from "../pages/users/UserListPage";
 import UserPage from "../pages/users/UserPage";
 import EditUserPage from "../pages/users/EditUserPage";
 import ErrorPage from "../pages/ErrorPage";

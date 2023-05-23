@@ -4,7 +4,7 @@ function displayFullName(data: USER["data"]) {
   return `${data.firstName} ${data.lastName}`;
 }
 
-const UserForm = [
+const userFormConfig = [
   {
     name: "userName",
     type: "text",
@@ -26,4 +26,4 @@ const UserForm = [
 
 ];
 
-export { displayFullName, UserForm };
+export { displayFullName, userFormConfig  };

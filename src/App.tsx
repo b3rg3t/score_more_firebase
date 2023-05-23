@@ -1,5 +1,4 @@
 import "./App.scss";
-import AddUserForm from "./components/users/AddUserForm";
 import DisplayUsers from "./components/users/DisplayUsers";
 
 function App() {
@@ -9,7 +8,6 @@ function App() {
         <h1>Score more firebase</h1>
       </header>
       <DisplayUsers />
-      <AddUserForm />
     </div>
   );
 }

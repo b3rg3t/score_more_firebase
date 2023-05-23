@@ -2,23 +2,26 @@ import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 
 interface ProfilePicProps {
-  width?: number | string;
-  height?: number | string;
+  size?: number | string;
+  className?: string;
+  wrapperStyle?: string;
+  iconStyle?: string;
   openFullScreen?: boolean;
 }
 
-const ProfilePic = ({ width, height }: ProfilePicProps) => {
+const ProfilePic = ({ size, wrapperStyle, iconStyle }: ProfilePicProps) => {
   return (
     <div
-      className="rounded-circle bg-dark w-auto d-flex justify-content-center align-items-center overflow-hidden"
+      className={`rounded-circle bg-dark d-flex justify-content-center align-items-center overflow-hidden ${wrapperStyle}`}
       style={{
-        width,
-        height,
+        width: size ? size : undefined,
+        height: "auto",
       }}
     >
       <FaUserAlt
+        className={`${iconStyle}`}
         color="white"
-        width={typeof width === "number" ? width * 0.8 : undefined}
+        size={typeof size === "number" ? size * 1 : undefined}
       />
     </div>
   );

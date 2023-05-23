@@ -1,12 +1,12 @@
 import { useEffect, useReducer } from "react";
 
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../../lib/firebase/init-firebase";
-import { DATA_ACTIONS, FETCH_FUNCTIONS, INITIAL_DATA } from "./typescript";
+import { DATA_ACTIONS, FETCH_FUNCTIONS, INITIAL_DATA } from "./types";
 import { FirebaseTypes } from "../../lib/firebase/typescript";
 
 const { FETCH_INITIAL, FETCH_SUCCESS, FETCH_ERROR } = DATA_ACTIONS;
-const { GET_ALL_USERS } = FETCH_FUNCTIONS;
+const { GET_ALL_USERS, GET_USER } = FETCH_FUNCTIONS;
 const { USERS } = FirebaseTypes;
 
 const dataReducer = (
@@ -37,7 +37,7 @@ const dataReducer = (
   }
 };
 
-const useApiHook = (type: FETCH_FUNCTIONS) => {
+const useApiHook = (type: FETCH_FUNCTIONS, id?: string) => {
   const [state, dispatch] = useReducer(dataReducer, {
     isLoading: false,
     isError: undefined,
@@ -66,9 +66,25 @@ const useApiHook = (type: FETCH_FUNCTIONS) => {
     return state;
   };
 
+  const getUser = async (id: string) => {
+    dispatch({ type: FETCH_INITIAL });
+    const userRef = doc(db, USERS, id);
+    const docSnap = await getDoc(userRef);
+    if (docSnap.exists()) {
+      dispatch({ type: FETCH_SUCCESS, payload: docSnap.data() });
+    } else {
+      dispatch({
+        type: FETCH_ERROR,
+        payload: { message: "Not found", status: 500 },
+      });
+    }
+  };
+
   useEffect(() => {
     if (type === GET_ALL_USERS) {
       getAllUsers();
+    } else if (type === GET_USER && id) {
+      getUser(id);
     }
     // eslint-disable-next-line
   }, [type]);

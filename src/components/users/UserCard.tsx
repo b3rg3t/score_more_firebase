@@ -31,7 +31,7 @@ const UserCard = ({ user, index }: UserCardProps) => {
   return (
     <li className={wrapperStyle}>
       <div className="d-flex">
-        <ProfilePic width={45} />
+        <ProfilePic size={45} wrapperStyle={"me-2"} iconStyle={"p-1"}/>
         <div>
           <NavLink className="me-1 link-style" to={`/users/user/${user.id}`}>
             {user.data.userName}

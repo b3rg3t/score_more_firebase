@@ -4,7 +4,7 @@ import "./index.scss";
 
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ROUTES } from "./router/helper";
+import { ROUTES } from "./router/routes";
 import { IconContext } from "react-icons";
 
 const rootElement = document.getElementById("root");
