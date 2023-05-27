@@ -13,7 +13,7 @@ const Root = () => {
   return (
     <>
       <Header />
-      <main id="detail">
+      <main id="detail" className="px-1">
         <Outlet />
       </main>
       <Footer />

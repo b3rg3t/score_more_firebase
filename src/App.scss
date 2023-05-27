@@ -11,8 +11,10 @@
   #detail {
     display: flex;
     color: white;
+    width: 100%;
     height: 100%;
     overflow: hidden;
+    position: relative;
     background-color: $bg-main-color;
   }
 }
@@ -33,6 +35,9 @@
   background-color: $bg-nav-color;
 }
 
+.text-sm {
+  font-size: 0.75rem;
+}
 
 .flex-1 {
   flex: 1;

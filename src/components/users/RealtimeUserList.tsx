@@ -31,7 +31,7 @@ const RealtimeUserList = () => {
         </Link>
       </header>
       {users.length > 0 ? (
-        <ul className="list-unstyled d-flex flex-column justify-content-start mb-0 px-1">
+        <ul className="list-unstyled d-flex flex-column justify-content-start mb-0">
           {users.map((user: USER, index: number) => {
             return <UserCard key={user.id} user={user} index={index} />;
           })}

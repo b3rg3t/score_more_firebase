@@ -4,6 +4,6 @@ interface WrapperMainProps {
   children: React.ReactElement;
 }
 
-const WrapperMain = ({ children }: WrapperMainProps) => <section>{children}</section>;
+const WrapperMain = ({ children }: WrapperMainProps) => <section className="px-1">{children}</section>;
 
 export default WrapperMain;

@@ -1,3 +1,4 @@
 export enum FirebaseTypes {
-    USERS = "users"
+  USERS = "users",
+  GAMES = "games",
 }
