@@ -15,7 +15,7 @@ const User = () => {
   return (
     <FetchHandler isError={isError} isLoading={isLoading}>
       <section className="w-100 p-1 d-flex align-items-start">
-        <div className="bg-white w-100 rounded border p-1">
+        <div className="bg-white text-dark w-100 rounded border p-1">
           <p>
             <span className="fw-bold">{data?.userName}</span>{" "}-{" "}
             <span>{fullName}</span>
