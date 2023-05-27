@@ -10,12 +10,44 @@
   overflow: hidden;
   #detail {
     display: flex;
+    color: white;
     height: 100%;
     overflow: hidden;
     background-color: $bg-main-color;
   }
 }
 
+#header {
+  min-height: $nav-height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-nav-color;
+}
+
+#footer {
+  min-height: $nav-height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-nav-color;
+}
+
+
+.flex-1 {
+  flex: 1;
+}
+
+.active {
+  color: red;
+}
+
+.link-nav {
+  color: lightgray;
+}
+a .active {
+  color: red;
+}
 .link-style {
   text-decoration: none;
   color: $link-color;

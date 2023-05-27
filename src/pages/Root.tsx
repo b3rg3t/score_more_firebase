@@ -1,22 +1,22 @@
 import React from "react";
 
-import "../App.scss"
+import "../App.scss";
 import { Outlet } from "react-router-dom";
-import Navigation from "../components/layout/navigation/Navigation";
+import Header from "../components/layout/header/Header";
+import Footer from "../components/layout/footer/Footer";
 
-export const loader = async ({params}: any) => {
-    return params
+export const loader = async ({ params }: any) => {
+  return params;
 };
 
 const Root = () => {
   return (
     <>
-      <div id="navigation">
-        <Navigation />
-      </div>
-      <div id="detail">
+      <Header />
+      <main id="detail">
         <Outlet />
-      </div>
+      </main>
+      <Footer />
     </>
   );
 };
