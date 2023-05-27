@@ -65,6 +65,11 @@ const ROUTES: any = [
             errorElement: <ErrorPage />,
           },
           {
+            path: "game/:gameId",
+            element: <FormNewGame />,
+            errorElement: <ErrorPage />,
+          },
+          {
             path: "create-game",
             element: <FormNewGame />,
             errorElement: <ErrorPage />,
