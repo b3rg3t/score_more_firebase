@@ -5,9 +5,9 @@ import UserPage from "../pages/users/UserPage";
 import EditUserPage from "../pages/users/EditUserPage";
 import ErrorPage from "../pages/ErrorPage";
 import CreateUserPage from "../pages/users/CreateUserPage";
-import Home from "../components/home/Home";
 import GamePage from "../pages/games/GamePage";
-import FormNewGame from "../components/games/forms/FormNewGame";
+import HomePage from "../pages/HomePage";
+import GameFormPage from "../pages/games/GameFormPage";
 
 const ROUTES: any = [
   {
@@ -18,7 +18,7 @@ const ROUTES: any = [
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <HomePage />,
         errorElement: <ErrorPage />,
       },
       {
@@ -64,14 +64,14 @@ const ROUTES: any = [
             element: <GamePage />,
             errorElement: <ErrorPage />,
           },
-          {
-            path: "game/:gameId",
-            element: <FormNewGame />,
-            errorElement: <ErrorPage />,
-          },
+          // {
+          //   path: "game/:gameId",
+          //   element: <FormNewGame />,
+          //   errorElement: <ErrorPage />,
+          // },
           {
             path: "create-game",
-            element: <FormNewGame />,
+            element: <GameFormPage />,
             errorElement: <ErrorPage />,
           },
         ],

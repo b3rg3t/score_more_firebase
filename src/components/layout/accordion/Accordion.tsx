@@ -24,7 +24,6 @@ const Accordion = ({ title, children }: AccordionProps) => {
       }
       classParentString="hallelulja"
       triggerClassName="hallelulja"
-      // openedClassName={accordionHeaderStyle}
       contentOuterClassName="border-top border-bottom mb-1"
     >
       {children}

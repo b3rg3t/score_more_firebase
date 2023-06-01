@@ -1,11 +1,12 @@
 import React from "react";
 
 import Accordion from "../layout/accordion/Accordion";
+import WrapperHeader from "../layout/general/WrapperHeader";
 
 const Home = () => {
   return (
     <section className="w-100">
-      Home
+      <WrapperHeader title="Home"/>
       <Accordion title="Active games">
         <>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque

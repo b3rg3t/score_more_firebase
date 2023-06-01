@@ -1,4 +1,4 @@
-import { USER } from "../../typescript/users";
+import { USER } from "../../../typescript/users";
 
 function displayFullName(data: USER["data"]) {
   return `${data.firstName} ${data.lastName}`;
@@ -9,6 +9,8 @@ const userFormConfig = [
     name: "userName",
     type: "text",
     label: "User name",
+    defaultValue: "",
+    placeholder: "",
     required: true,
   },
   {

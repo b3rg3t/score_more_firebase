@@ -9,7 +9,7 @@ const SignInUser = observer(() =>
   authUserStore.user ? (
     <Link
       to={`/users/user/${authUserStore.user?.id}`}
-      className="d-flex align-items-center"
+      className="d-flex align-items-center text-decoration-none"
     >
       <ProfilePic size={30} iconStyle="bg-success" wrapperStyle="me-1" />
       <p className="fw-bold text-white">{authUserStore.user?.userName}</p>

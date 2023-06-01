@@ -2,10 +2,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import WrapperHeader from "../layout/general/WrapperHeader";
 import DynamicInput from "./DynamicInput";
+import { INPUT_DATA } from "./typescript";
 
 interface DynamicFormProps {
   title: string;
-  inputs?: [];
+  inputs?: INPUT_DATA[];
   callBackFunc?: (data: any) => void;
 }
 
@@ -24,7 +25,7 @@ const DynamicForm = ({ title, inputs, callBackFunc }: DynamicFormProps) => {
 
   return (
     <form
-      className="px-2 bg-dark rounded border m-1 text-white"
+      className="px-2 bg-dark rounded border m-1 text-white flex-1 d-flex flex-column position-relative"
       onSubmit={handleSubmit(onSubmitCallback)}
     >
       <WrapperHeader title={title} />
@@ -32,6 +33,7 @@ const DynamicForm = ({ title, inputs, callBackFunc }: DynamicFormProps) => {
         ? inputs.map((input) => {
             return (
               <DynamicInput
+                key={input.name}
                 data={input}
                 register={register}
                 control={control}
@@ -40,7 +42,7 @@ const DynamicForm = ({ title, inputs, callBackFunc }: DynamicFormProps) => {
             );
           })
         : "No form configuration"}
-      <div className="py-2">
+      <div className="py-2 d-flex justify-content-end">
         <button type="submit" className="btn btn-primary btn-sm me-1">
           Submit
         </button>

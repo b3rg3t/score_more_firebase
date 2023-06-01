@@ -1,13 +1,10 @@
-import React from 'react'
-import Navigation from '../components/layout/header/Header'
+import WrapperPage from "../components/layout/general/WrapperPage";
+import Home from "../components/home/Home";
 
-const HomePage = () => {
-    return (
-        <div>
-            Home
-            <Navigation />
-        </div>
-    )
-}
+const HomePage = () => (
+  <WrapperPage id="home">
+    <Home />
+  </WrapperPage>
+);
 
-export default HomePage
+export default HomePage;

@@ -13,6 +13,7 @@ const { GET_ALL_GAMES } = FETCH_FUNCTIONS;
 const GameList = () => {
   const [{ isError, isLoading, data }] = useApiHook(GET_ALL_GAMES);
 
+  console.log(data)
   return (
     <>
       <WrapperHeader title="Games">

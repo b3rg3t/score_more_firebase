@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import useApiHook from "../api/useApiHook";
 import { FETCH_FUNCTIONS } from "../api/types";
 import FetchHandler from "../layout/general/FetchHandler";
-import { displayFullName } from "./helper";
+import { displayFullName } from "./forms/helper";
 
 const { GET_USER } = FETCH_FUNCTIONS;
 

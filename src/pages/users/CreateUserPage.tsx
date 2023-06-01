@@ -1,11 +1,14 @@
+import { useParams } from "react-router-dom";
 
-import UserForm from "../../components/users/UserForm";
+import WrapperPage from "../../components/layout/general/WrapperPage";
+import UserForm from "../../components/users/forms/UserForm";
 
 const CreateUserPage = () => {
+  let { userId } = useParams();
   return (
-    <div>
-      <UserForm />
-    </div>
+    <WrapperPage id="create-user-form">
+      <UserForm id={userId ? userId : ""} />
+    </WrapperPage>
   );
 };
 
