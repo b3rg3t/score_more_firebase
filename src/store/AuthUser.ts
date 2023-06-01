@@ -11,14 +11,20 @@ class AuthUser {
     lastName: "Berg",
     userName: "b3rg3t",
     id: "qwejn12NjNJ1",
-    shortName: this.user?.firstName && this.user?.lastName ? `${this.user?.firstName} ${this.user?.lastName}` : ""
+    shortName:
+      this.user?.firstName && this.user?.lastName
+        ? `${this.user?.firstName} ${this.user?.lastName}`
+        : "",
   };
-  activeGame: string = "";
+  activeGame: string | null = "";
 
-  constructor(user: AuthUserType) {
+  constructor() {
     makeObservable(this, {
       user: observable,
       setAuthUser: action,
+      getFullName: action,
+      activeGame: observable,
+      setActiveGame: action,
     });
   }
 
@@ -26,16 +32,15 @@ class AuthUser {
     return `${this.user?.firstName} ${this.user?.lastName}`;
   }
 
-  setAuthUser(mewValues: AuthUserType) {
-    this.user = setAuthUser({
-      firstName: "David",
-      lastName: "Berg",
-      userName: "b3rg3t",
-      id: "qwejn12NjNJ1",
-    });
+  setAuthUser(newValues: AuthUserType) {
+    this.user = setAuthUser(newValues);
+  }
+
+  setActiveGame(gameId: string) {
+    this.activeGame = gameId;
   }
 }
-// @ts-expect-error
-const store = new AuthUser()
 
-export default store;
+const authUserStore = new AuthUser();
+
+export default authUserStore;
