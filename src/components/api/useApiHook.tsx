@@ -109,7 +109,7 @@ const useApiHook = (type: FETCH_FUNCTIONS, id?: string) => {
       getAllGames();
     }
     // eslint-disable-next-line
-  }, [type]);
+  }, [type, id]);
 
   return [state];
 };

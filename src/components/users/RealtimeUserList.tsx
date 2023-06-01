@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import LoadingSpinner from "../utils/LoadingSpinner";
 import WrapperHeader from "../layout/general/WrapperHeader";
+import WrapperList from "../layout/general/WrapperList";
 
 const RealtimeUserList = () => {
   const [users, setUsers] = useState([] as any);
@@ -21,7 +22,7 @@ const RealtimeUserList = () => {
   }, []);
 
   return (
-    <section className="w-100 overflow-auto">
+    <>
       <WrapperHeader title="Users">
         <Link
           to="/users/create-user"
@@ -31,17 +32,17 @@ const RealtimeUserList = () => {
         </Link>
       </WrapperHeader>
       {users.length > 0 ? (
-        <ul className="list-unstyled d-flex flex-column justify-content-start mb-0">
+        <WrapperList>
           {users.map((user: USER, index: number) => {
             return <UserCard key={user.id} user={user} index={index} />;
           })}
-        </ul>
+        </WrapperList>
       ) : (
         <div className="w-100 d-flex justify-content-center align-items-center">
           <LoadingSpinner />
         </div>
       )}
-    </section>
+    </>
   );
 };
 

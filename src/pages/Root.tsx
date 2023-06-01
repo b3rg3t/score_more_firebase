@@ -13,7 +13,7 @@ const Root = () => {
   return (
     <>
       <Header />
-      <main id="detail" className="p-1 w-100">
+      <main id="detail" className="w-100">
         <Outlet />
       </main>
       <Footer />

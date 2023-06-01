@@ -28,7 +28,7 @@ class AuthUser {
     });
   }
 
-  get getFullName(): string {
+  getFullName(): string {
     return `${this.user?.firstName} ${this.user?.lastName}`;
   }
 

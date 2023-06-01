@@ -22,7 +22,7 @@ const GameListCard = ({ game }: GameListCardProps) => {
           ea itaque quos.
         </section>
         <footer className="border-top text-sm d-flex justify-content-between text-muted">
-          <span>{formatDate(game.created.seconds)}</span>
+          <span>{formatDate({ date: game.created.seconds })}</span>
           <span>{game.id}</span>
         </footer>
       </>
