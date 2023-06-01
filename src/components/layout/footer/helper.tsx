@@ -1,4 +1,4 @@
-import { FaGamepad, FaHome, FaTrophy } from "react-icons/fa";
+import { FaGamepad, FaHome, FaTrophy, FaUsers } from "react-icons/fa";
 
 const footerLinks = [
   {
@@ -10,6 +10,11 @@ const footerLinks = [
     icon: <FaGamepad />,
     label: "Games",
     to: "/games",
+  },
+  {
+    icon: <FaUsers />,
+    label: "Users",
+    to: "/users",
   },
   {
     icon: <FaTrophy />,

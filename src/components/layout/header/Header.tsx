@@ -5,7 +5,7 @@ import { navLinks } from "./helper";
 
 const Header = () => {
   return (
-    <nav id="header" className="border-bottom border-white">
+    <nav id="header" className="border-bottom border-white box-shadow">
       <ul className="list-unstyled d-flex flex-1 mb-0 w-100">
         {navLinks.map((link) => (
           <li key={link.to} className="px-1 ">

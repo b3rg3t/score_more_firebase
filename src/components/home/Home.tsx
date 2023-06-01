@@ -4,7 +4,7 @@ import Accordion from "../layout/accordion/Accordion";
 
 const Home = () => {
   return (
-    <div>
+    <section className="w-100">
       Home
       <Accordion title="Active games">
         <>
@@ -22,7 +22,7 @@ const Home = () => {
           deleniti aut fugiat libero accusantium.
         </>
       </Accordion>
-    </div>
+    </section>
   );
 };
 

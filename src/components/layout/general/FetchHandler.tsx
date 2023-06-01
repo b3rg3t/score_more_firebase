@@ -11,7 +11,11 @@ interface FetchHandlerProps {
 
 const FetchHandler = ({ isError, isLoading, children }: FetchHandlerProps) => {
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="w-100 d-flex justify-content-center align-items-center">
+        <LoadingSpinner />
+      </div>
+    );
   } else if (isError?.message && isError?.status) {
     return <ErrorHandler isError={isError} />;
   } else if (children) {
