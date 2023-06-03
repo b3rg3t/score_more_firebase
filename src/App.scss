@@ -64,7 +64,14 @@ a .active {
 }
 
 .accordion-header {
-  color: $chevron-color;
+  color: $bg-main-color;
+}
+.accordion {
+  .is-open {
+    .accordion-header {
+      border-bottom: 1px solid $bg-main-color;
+    }
+  }
 }
 
 .rotate {
@@ -94,11 +101,10 @@ a .active {
 .error-bg {
   background-color: $bg-error-color;
 }
-small{
+small {
   font-size: 0.8rem;
   line-height: 0.8;
 }
-
 
 .select-players__multi-value {
   margin: 0;
