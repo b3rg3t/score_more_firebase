@@ -1,13 +1,19 @@
 import { USER } from "../../../typescript/users";
+import { INPUT_ENUM } from "../../forms/types";
+
+const { TEXT } = INPUT_ENUM;
 
 function displayFullName(data: USER["data"]) {
-  return `${data.firstName} ${data.lastName}`;
+  if (data.firstName && data.lastName) {
+    return `${data.firstName} ${data.lastName}`;
+  } 
+  return "Missing properties"
 }
 
 const userFormConfig = [
   {
     name: "userName",
-    type: "text",
+    type: TEXT,
     label: "User name",
     defaultValue: "",
     placeholder: "",
@@ -15,17 +21,16 @@ const userFormConfig = [
   },
   {
     name: "firstName",
-    type: "text",
+    type: TEXT,
     label: "First name",
     required: true,
   },
   {
     name: "lastName",
-    type: "text",
+    type: TEXT,
     label: "Last name",
     required: true,
   },
-
 ];
 
-export { displayFullName, userFormConfig  };
+export { displayFullName, userFormConfig };

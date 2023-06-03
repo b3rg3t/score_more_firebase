@@ -11,6 +11,7 @@ const GameForm = ({ id }: GameFormProps) => {
     <DynamicForm
       title={id ? "Edit game" : "Create new game"}
       inputs={gameFormConfig}
+      submitBtnLabel={"Start game"}
     />
   );
 };

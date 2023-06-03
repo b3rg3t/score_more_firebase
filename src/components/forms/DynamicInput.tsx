@@ -1,39 +1,41 @@
-import SelectUser from "./inputs/SelectUser";
+import CreatableSelectPlayers from "./inputs/CreatableSelectPlayers";
 import WrapperInput from "./layout/WrapperInput";
-import { INPUT_DATA, INPUT_ENUM } from "./typescript";
+import { INPUT_DATA, INPUT_ENUM } from "./types";
 
-interface DynamicInputProps {
-  data: INPUT_DATA;
+export interface DynamicInputProps {
+  input: INPUT_DATA;
   register: any;
   control: any;
   errors: any;
 }
 
-const { SELECT_USER } = INPUT_ENUM;
+const { SELECT_PLAYERS } = INPUT_ENUM;
 
-const DynamicInput = ({ data, register, errors }: DynamicInputProps) => {
-  const { type, registerParams } = data;
-  
+const DynamicInput = (props: DynamicInputProps) => {
+  const { input, register, errors } = props;
+
+  const { type, registerParams } = input;
+
   switch (type) {
-    case SELECT_USER:
+    case SELECT_PLAYERS:
       return (
-        <WrapperInput label={data.label} htmlFor={data.name} errors={errors}>
-          <SelectUser />
+        <WrapperInput label={input.label} htmlFor={input.name} errors={errors}>
+          <CreatableSelectPlayers {...props} />
         </WrapperInput>
       );
 
     default:
       return (
-        <WrapperInput label={data.label} htmlFor={data.name} errors={errors}>
+        <WrapperInput label={input.label} htmlFor={input.name} errors={errors}>
           <input
             className="form-control"
-            {...data}
-            {...register(data.name, {
+            {...input}
+            {...register(input.name, {
               ...registerParams,
-              required: data.required,
+              required: input.required,
             })}
             style={{
-              border: errors[data.name] ? `1px solid red` : undefined,
+              border: errors[input.name] ? `1px solid red` : undefined,
             }}
           />
         </WrapperInput>

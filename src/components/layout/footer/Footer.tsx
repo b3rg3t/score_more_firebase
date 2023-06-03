@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Footer = () => {
   return (
     <footer id="footer" className="border-top border-white">
-      <nav className="flex-1">
+      <nav className="flex-1 py-2">
         <ul className="list-unstyled d-flex mb-0 w-100">
           {footerLinks.map((link) => (
             <li

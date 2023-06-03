@@ -19,7 +19,7 @@ const GameList = () => {
       <WrapperHeader title="Games">
         <ButtonCreateGame />
       </WrapperHeader>
-      <FetchHandler isError={isError} isLoading={isLoading}>
+      <FetchHandler isError={isError} isLoading={isLoading} data={data}>
         <WrapperList>
           {data &&
             data?.map((game: GAME_TYPE) => (

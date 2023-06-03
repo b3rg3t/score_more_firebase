@@ -16,7 +16,7 @@ const ErrorHandler = ({ isError }: ErrorHandlerProps) => {
     const time = formatDate({ date: new Date(), withTime: true });
     return (
       <section className="w-100 position-relative">
-        <div className="error-bg rounded text-danger d-flex flex-column m-1 p-2">
+        <div className="error-bg rounded text-danger d-flex flex-column m-1 p-2 box-shadow">
           <WrapperHeader
             title="Error"
             className="border-bottom border-danger"

@@ -15,8 +15,8 @@ const WrapperInput = ({
   errors,
 }: WrapperInputProps) => {
   return (
-    <div className="flex-1">
-      <label className="w-100" htmlFor={htmlFor}>
+    <div className="flex-1 mb-1">
+      <label className="w-100 fw-normal" htmlFor={htmlFor}>
         {label}
         {children}
       </label>

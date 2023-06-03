@@ -6,10 +6,11 @@ import { ERROR_TYPE } from "../../api/types";
 interface FetchHandlerProps {
   isError?: ERROR_TYPE;
   isLoading?: boolean;
+  data?: any;
   children?: React.ReactElement;
 }
 
-const FetchHandler = ({ isError, isLoading, children }: FetchHandlerProps) => {
+const FetchHandler = ({ isError, isLoading, data, children }: FetchHandlerProps) => {
   if (isLoading) {
     return (
       <div className="w-100 d-flex justify-content-center align-items-center">
@@ -18,7 +19,7 @@ const FetchHandler = ({ isError, isLoading, children }: FetchHandlerProps) => {
     );
   } else if (isError?.message && isError?.status) {
     return <ErrorHandler isError={isError} />;
-  } else if (children) {
+  } else if (children && data) {
     return <>{children}</>;
   } else {
     return <></>;

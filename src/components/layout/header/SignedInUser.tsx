@@ -5,13 +5,13 @@ import authUserStore from "../../../store/AuthUser";
 import ProfilePic from "../../users/ProfilePic";
 import { Link } from "react-router-dom";
 
-const SignInUser = observer(() =>
+const SignedInUser = observer(() =>
   authUserStore.user ? (
     <Link
       to={`/users/user/${authUserStore.user?.id}`}
       className="d-flex align-items-center text-decoration-none"
     >
-      <ProfilePic size={30} iconStyle="bg-success" wrapperStyle="me-1" />
+      <ProfilePic size={24} iconStyle="bg-success" wrapperStyle="me-1" />
       <p className="fw-bold text-white">{authUserStore.user?.userName}</p>
     </Link>
   ) : (
@@ -19,4 +19,4 @@ const SignInUser = observer(() =>
   )
 );
 
-export default SignInUser;
+export default SignedInUser;

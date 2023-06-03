@@ -4,6 +4,7 @@ import WrapperPage from "../../components/layout/general/WrapperPage";
 
 const EditUserPage = () => {
   let { userId } = useParams();
+
   return (
     <WrapperPage id="edit-user-form">
       <UserForm id={userId ? userId : ""} />
