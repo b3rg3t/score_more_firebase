@@ -5,10 +5,11 @@ import UserPage from "../pages/users/UserPage";
 import EditUserPage from "../pages/users/EditUserPage";
 import ErrorPage from "../pages/ErrorPage";
 import CreateUserPage from "../pages/users/CreateUserPage";
-import GamePage from "../pages/games/GamePage";
+import GameListPage from "../pages/games/GameListPage";
 import HomePage from "../pages/HomePage";
 import GameFormPage from "../pages/games/GameFormPage";
 import EditMobxUser from "../pages/users/EditMobxUser";
+import GameActivePage from "../pages/games/GameActivePage";
 
 const ROUTES: any = [
   {
@@ -72,14 +73,14 @@ const ROUTES: any = [
         children: [
           {
             index: true,
-            element: <GamePage />,
+            element: <GameListPage />,
             errorElement: <ErrorPage />,
           },
-          // {
-          //   path: "game/:gameId",
-          //   element: <FormNewGame />,
-          //   errorElement: <ErrorPage />,
-          // },
+          {
+            path: "game/:gameId",
+            element: <GameActivePage />,
+            errorElement: <ErrorPage />,
+          },
           {
             path: "create-game",
             element: <GameFormPage />,

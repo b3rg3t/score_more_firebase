@@ -6,7 +6,7 @@ import { DATA_ACTIONS, FETCH_FUNCTIONS, INITIAL_DATA } from "./types";
 import { FirebaseTypes } from "../../lib/firebase/typescript";
 
 const { FETCH_INITIAL, FETCH_SUCCESS, FETCH_ERROR } = DATA_ACTIONS;
-const { GET_ALL_USERS, GET_USER, GET_ALL_GAMES } = FETCH_FUNCTIONS;
+const { GET_ALL_USERS, GET_USER, GET_ALL_GAMES, GET_GAME } = FETCH_FUNCTIONS;
 const { USERS, GAMES } = FirebaseTypes;
 
 const dataReducer = (
@@ -100,14 +100,35 @@ const useApiHook = (type: FETCH_FUNCTIONS, id?: string) => {
     return state;
   };
 
-  useEffect(() => {
-    if (type === GET_ALL_USERS) {
-      getAllUsers();
-    } else if (type === GET_USER && id) {
-      getUser(id);
-    } else if (type === GET_ALL_GAMES) {
-      getAllGames();
+  const getGame = async (id: string) => {
+    dispatch({ type: FETCH_INITIAL });
+    const gameRef = doc(db, GAMES, id);
+    const docSnap = await getDoc(gameRef);
+    if (docSnap.exists()) {
+      dispatch({ type: FETCH_SUCCESS, payload: docSnap.data() });
+    } else {
+      dispatch({
+        type: FETCH_ERROR,
+        payload: { message: "Not found", status: 500 },
+      });
     }
+  };
+
+  useEffect(() => {
+    if (id) {
+      if (type === GET_USER && id) {
+        getUser(id);
+      } else if (type === GET_GAME && id) {
+        getGame(id);
+      }
+    } else {
+      if (type === GET_ALL_USERS) {
+        getAllUsers();
+      } else if (type === GET_ALL_GAMES) {
+        getAllGames();
+      }
+    }
+
     // eslint-disable-next-line
   }, [type, id]);
 
