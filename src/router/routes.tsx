@@ -8,6 +8,7 @@ import CreateUserPage from "../pages/users/CreateUserPage";
 import GamePage from "../pages/games/GamePage";
 import HomePage from "../pages/HomePage";
 import GameFormPage from "../pages/games/GameFormPage";
+import EditMobxUser from "../pages/users/EditMobxUser";
 
 const ROUTES: any = [
   {
@@ -52,6 +53,16 @@ const ROUTES: any = [
           {
             index: true,
             element: <UserListPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        path: "/edit",
+        children: [
+          {
+            index: true,
+            element: <EditMobxUser />,
             errorElement: <ErrorPage />,
           },
         ],

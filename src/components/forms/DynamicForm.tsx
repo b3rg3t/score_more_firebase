@@ -7,6 +7,7 @@ import WrapperHeader from "../layout/general/WrapperHeader";
 import DynamicInput from "./DynamicInput";
 import { INPUT_DATA } from "./types";
 import OverlayLoading from "./layout/OverlayLoading";
+import { FaInfoCircle } from "react-icons/fa";
 
 interface DynamicFormProps {
   title: string;
@@ -35,7 +36,7 @@ const DynamicForm = ({
   });
 
   const onSubmitCallback = (data: any) => {
-    setIsLoading(true)
+    setIsLoading(true);
     callBackFunc && callBackFunc(data);
   };
 
@@ -59,6 +60,9 @@ const DynamicForm = ({
             );
           })
         : "No form configuration"}
+      <p className="text-muted font-sm">
+        <FaInfoCircle className="me-1"/> *-symbol after label means that input is mandatory
+      </p>
       <div className="py-2 d-flex justify-content-end">
         <button type="submit" className="btn btn-primary btn-sm me-1">
           {submitBtnLabel ? submitBtnLabel : "Submit"}

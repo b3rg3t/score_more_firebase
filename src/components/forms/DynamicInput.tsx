@@ -19,14 +19,24 @@ const DynamicInput = (props: DynamicInputProps) => {
   switch (type) {
     case SELECT_PLAYERS:
       return (
-        <WrapperInput label={input.label} htmlFor={input.name} errors={errors}>
+        <WrapperInput
+          label={input.label}
+          htmlFor={input.name}
+          required={input.required}
+          errors={errors}
+        >
           <CreatableSelectPlayers {...props} />
         </WrapperInput>
       );
 
     default:
       return (
-        <WrapperInput label={input.label} htmlFor={input.name} errors={errors}>
+        <WrapperInput
+          label={input.label}
+          htmlFor={input.name}
+          required={input.required}
+          errors={errors}
+        >
           <input
             className="form-control"
             {...input}
