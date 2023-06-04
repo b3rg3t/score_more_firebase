@@ -16,33 +16,40 @@ const ROUTES: any = [
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
+    exact: true,
     loader: rootLoader,
     children: [
       {
         index: true,
+        exact: true,
         element: <HomePage />,
         errorElement: <ErrorPage />,
       },
       {
         path: "/users",
+        exact: true,
         children: [
           {
             index: true,
+            exact: true,
             element: <UserListPage />,
             errorElement: <ErrorPage />,
           },
           {
             path: "create-user",
+            exact: true,
             element: <CreateUserPage />,
             errorElement: <ErrorPage />,
           },
           {
             path: "user/:userId",
+            exact: true,
             element: <UserPage />,
             errorElement: <ErrorPage />,
           },
           {
             path: "user/:userId/edit",
+            exact: true,
             element: <EditUserPage />,
             errorElement: <ErrorPage />,
           },
@@ -50,9 +57,11 @@ const ROUTES: any = [
       },
       {
         path: "/leaderboard",
+        exact: true,
         children: [
           {
             index: true,
+            exact: true,
             element: <UserListPage />,
             errorElement: <ErrorPage />,
           },
@@ -60,9 +69,11 @@ const ROUTES: any = [
       },
       {
         path: "/edit",
+        exact: true,
         children: [
           {
             index: true,
+            exact: true,
             element: <EditMobxUser />,
             errorElement: <ErrorPage />,
           },
@@ -70,20 +81,30 @@ const ROUTES: any = [
       },
       {
         path: "/games",
+        exact: true,
         children: [
           {
             index: true,
+            exact: true,
             element: <GameListPage />,
             errorElement: <ErrorPage />,
           },
           {
+            path: "create-game",
+            exact: true,
+            element: <GameFormPage />,
+            errorElement: <ErrorPage />,
+          },
+          {
             path: "game/:gameId",
+            exact: true,
             element: <GameActivePage />,
             errorElement: <ErrorPage />,
           },
           {
-            path: "create-game",
-            element: <GameFormPage />,
+            path: "game/:gameId/:roundId",
+            exact: true,
+            element: <GameActivePage />,
             errorElement: <ErrorPage />,
           },
         ],

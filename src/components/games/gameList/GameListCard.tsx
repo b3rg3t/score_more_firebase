@@ -16,10 +16,9 @@ const GameListCard = ({ game }: GameListCardProps) => {
           <Link to={`/games/game/${game.id}`}>{game.name}</Link>
         </header>
         <section>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, est
-          possimus. Rem distinctio rerum necessitatibus magni commodi eveniet
-          assumenda quod corrupti ipsa aut, laboriosam quas iusto reprehenderit,
-          ea itaque quos.
+         <ul>
+          <li>Leader: b3rg3t</li>
+         </ul>
         </section>
         <footer className="border-top text-sm d-flex justify-content-between text-muted">
           <span>{formatDate({ date: game.created.seconds })}</span>

@@ -6,7 +6,5 @@ const { USERS, GAMES } = FirebaseTypes;
 
 const userCollectionRef = collection(db, USERS);
 const gameCollectionRef = collection(db, GAMES);
-const roundsCollectionRef = collection(db, GAMES);
-
 
 export { userCollectionRef, gameCollectionRef };

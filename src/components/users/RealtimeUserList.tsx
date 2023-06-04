@@ -15,7 +15,7 @@ const RealtimeUserList = () => {
   useEffect(() => {
     const unsubscribe = onSnapshot(userCollectionRef, (snapshot) => {
       setUsers(
-        snapshot.docs.map((doc) => ({ id: doc.id, scores: doc.data() }))
+        snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
       );
     });
     return () => {

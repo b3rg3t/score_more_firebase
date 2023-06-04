@@ -1,4 +1,4 @@
-import { doc, onSnapshot, collection, getDoc } from "firebase/firestore";
+import { onSnapshot, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
 import { GAME_TYPE, ROUND_TYPE } from "../typescript/types";
@@ -23,11 +23,13 @@ const RealtimeGameActive = ({ id, round }: GameActiveProps) => {
   const [rounds, setRounds] = useState<ROUND_TYPE[] | null>(null);
   const [game, setGame] = useState<GAME_TYPE | null>(null);
 
+    console.log(round)
+
   useEffect(() => {
     if (data) {
       setGame(data);
     }
-  }, [data !== undefined]);
+  }, [data]);
 
   useEffect(() => {
     const docRef = collection(db, GAMES, id, "rounds");
@@ -35,7 +37,7 @@ const RealtimeGameActive = ({ id, round }: GameActiveProps) => {
     const unsubscribe = onSnapshot(docRef, (snapshot) => {
       const rounds: any = snapshot.docs.map((doc) => ({
         id: doc.id,
-        scores: doc.data(),
+        ...doc.data(),
       }));
       setRounds(rounds);
     });
@@ -43,13 +45,14 @@ const RealtimeGameActive = ({ id, round }: GameActiveProps) => {
     return () => {
       unsubscribe();
     };
+    // eslint-disable-next-line
   }, [id?.length]);
 
   return (
     <FetchHandler isError={isError} isLoading={isLoading} data={data}>
       <>
         <WrapperHeader title={game?.name ? game?.name : "Unknown"} />
-        <RoundList rounds={rounds}/>
+        <RoundList rounds={rounds} />
       </>
     </FetchHandler>
   );

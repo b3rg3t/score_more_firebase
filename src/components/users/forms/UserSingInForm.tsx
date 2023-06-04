@@ -5,10 +5,13 @@ import { userFormConfig } from "./helper";
 
 import authUserStore from "../../../store/AuthUser";
 import { AuthUserType } from "../../../store/types";
+import { useNavigate } from "react-router-dom";
 
 const UserSingInForm = observer(() => {
+  const navigate = useNavigate()
   const handleSubmit = (data: AuthUserType) => {
     authUserStore.setAuthUser(data);
+    navigate(-1)
   };
 
   return (

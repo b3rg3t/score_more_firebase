@@ -14,6 +14,7 @@ const Footer = () => {
             >
               <NavLink
                 to={link.to}
+                end={true}
                 className={({ isActive, isPending }) =>
                   `${
                     isPending ? "pending" : isActive ? "active" : "link-nav"

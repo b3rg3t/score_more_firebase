@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import RealtimeGameActive from "../../components/games/gameActive/RealtimeGameActive";
 
 const GameActivePage = () => {
-  let { gameId, round } = useParams();
+  let { gameId, roundId } = useParams();
   return (
     <WrapperPage id="game-active">
       <RealtimeGameActive
         // @ts-ignore
         id={gameId}
-        round={round}
+        round={roundId}
       />
     </WrapperPage>
   );

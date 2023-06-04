@@ -1,4 +1,3 @@
-import React from "react";
 import WrapperCard from "../../layout/general/WrapperCard";
 import { ROUND_TYPE } from "../typescript/types";
 
@@ -8,9 +7,12 @@ interface RoundCardProps {
 
 const RoundCard = ({ round }: RoundCardProps) => {
   return (
-    <WrapperCard>
-      <>{round.id}</>
-    </WrapperCard>
+    <>
+      <span className="badge bg-secondary mb-1">Round: {round.id}</span>
+      <WrapperCard>
+        <></>
+      </WrapperCard>
+    </>
   );
 };
 
