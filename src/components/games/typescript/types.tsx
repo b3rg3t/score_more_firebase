@@ -10,14 +10,15 @@ export type GAME_TYPE = {
   isActive: boolean;
   name: string;
   rounds?: ROUND_TYPE[];
+  playerIds: string[];
 };
 
 export type ROUND_TYPE = {
   id: string;
-  scores: ROUND_SCORE;
+  scores: ROUND_SCORE[];
 };
 
 export type ROUND_SCORE = {
   score: number;
-  user: USER;
+  player: any;
 };

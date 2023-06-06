@@ -41,7 +41,10 @@ const UserForm = ({ id }: UserFormProps) => {
         userName: data.userName,
       })
         .then((response) => {
-          console.log(response.id);
+          const userRef = doc(db, USERS, response.id);
+          updateDoc(userRef, {
+            uId: response.id
+          })
           navigate(`/users`);
         })
         .catch((error) => console.log(error));

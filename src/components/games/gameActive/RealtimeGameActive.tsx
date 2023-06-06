@@ -1,17 +1,16 @@
-import { onSnapshot, collection } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
+import { query, where, getDocs } from "firebase/firestore";
 
-import { GAME_TYPE, ROUND_TYPE } from "../typescript/types";
-import { db } from "../../../lib/firebase/init-firebase";
-import { FirebaseTypes } from "../../../lib/firebase/typescript";
 import WrapperHeader from "../../layout/general/WrapperHeader";
 import useApiHook from "../../api/useApiHook";
 import { FETCH_FUNCTIONS } from "../../api/types";
 import FetchHandler from "../../layout/general/FetchHandler";
 import RoundList from "../round/RoundList";
 
+import { userCollectionRef } from "../../../lib/firebase/firestore.collections";
+import { USER } from "../../../typescript/users";
+
 const { GET_GAME } = FETCH_FUNCTIONS;
-const { GAMES } = FirebaseTypes;
 
 interface GameActiveProps {
   id: string;
@@ -20,39 +19,36 @@ interface GameActiveProps {
 
 const RealtimeGameActive = ({ id, round }: GameActiveProps) => {
   const [{ isError, isLoading, data }] = useApiHook(GET_GAME, id);
-  const [rounds, setRounds] = useState<ROUND_TYPE[] | null>(null);
-  const [game, setGame] = useState<GAME_TYPE | null>(null);
+  const [players, setPlayers] = useState<USER["data"][]>([]);
 
-    console.log(round)
-
-  useEffect(() => {
+  useMemo(() => {
+    const getUserData = async () => {
+      const userQuery = query(
+        userCollectionRef,
+        where("uId", "in", data?.playerIds)
+      );
+      const userDocs = await getDocs(userQuery);
+      userDocs.forEach((userD) => {
+        const user = userD.data();
+        // @ts-ignore
+        setPlayers((prevState) => {
+          if (prevState.find((prev) => prev.uId === user.uId)) {
+            return prevState;
+          }
+          return [...prevState, user];
+        });
+      });
+    };
     if (data) {
-      setGame(data);
+      getUserData();
     }
   }, [data]);
-
-  useEffect(() => {
-    const docRef = collection(db, GAMES, id, "rounds");
-
-    const unsubscribe = onSnapshot(docRef, (snapshot) => {
-      const rounds: any = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setRounds(rounds);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-    // eslint-disable-next-line
-  }, [id?.length]);
 
   return (
     <FetchHandler isError={isError} isLoading={isLoading} data={data}>
       <>
-        <WrapperHeader title={game?.name ? game?.name : "Unknown"} />
-        <RoundList rounds={rounds} />
+        <WrapperHeader title={data?.name ? data?.name : "Unknown"} />
+        {players && <RoundList id={id} round={round} players={players} />}
       </>
     </FetchHandler>
   );

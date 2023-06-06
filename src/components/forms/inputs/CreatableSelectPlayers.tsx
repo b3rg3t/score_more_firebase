@@ -21,7 +21,6 @@ const CreatableSelectPlayers = ({ input, control }: DynamicInputProps) => {
   >(null);
 
   const MultiValueContainer = (props: any) => {
-    console.log(props);
     return (
       <components.MultiValueContainer {...props}>
         <span className="d-flex align-items-center px-2 rounded bg-dark text-white">
@@ -41,7 +40,6 @@ const CreatableSelectPlayers = ({ input, control }: DynamicInputProps) => {
       userName: inputValue,
     })
       .then((response) => {
-        console.log(response.id);
         const newPlayer = { label: inputValue, id: response.id };
         setOptions((prevState) => [
           { label: inputValue, id: response.id },

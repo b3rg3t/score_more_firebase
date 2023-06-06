@@ -13,7 +13,6 @@ const User = () => {
   const [{ isError, isLoading, data }] = useApiHook(GET_USER, userId);
 
   const fullName = data && displayFullName(data);
-  console.log(data);
   return (
     <FetchHandler isError={isError} isLoading={isLoading} data={data}>
       <section className="w-100 d-flex align-items-start">

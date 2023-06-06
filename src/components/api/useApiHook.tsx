@@ -37,15 +37,31 @@ const dataReducer = (
   }
 };
 
-const useApiHook = (type: FETCH_FUNCTIONS, id?: string) => {
-  const [state, dispatch] = useReducer(dataReducer, {
-    isLoading: false,
-    isError: undefined,
-    data: undefined,
-  });
+export const useFetchFuntions = (
+  dispatch?: React.Dispatch<{
+    type: DATA_ACTIONS;
+    payload?: any;
+  }>
+) => {
+  const getUser = async (id: string) => {
+    dispatch && dispatch({ type: FETCH_INITIAL });
+    const userRef = doc(db, USERS, id);
+    const docSnap = await getDoc(userRef);
 
+    if (docSnap.exists()) {
+      const user = docSnap.data();
+      dispatch && dispatch({ type: FETCH_SUCCESS, payload: user });
+      return user;
+    } else {
+      dispatch &&
+        dispatch({
+          type: FETCH_ERROR,
+          payload: { message: "Not found", status: 500 },
+        });
+    }
+  };
   const getAllUsers = async () => {
-    dispatch({ type: FETCH_INITIAL });
+    dispatch && dispatch({ type: FETCH_INITIAL });
     const userCollectionRef = collection(db, USERS);
 
     getDocs(userCollectionRef)
@@ -54,34 +70,37 @@ const useApiHook = (type: FETCH_FUNCTIONS, id?: string) => {
           data: doc.data(),
           id: doc.id,
         }));
-        dispatch({ type: FETCH_SUCCESS, payload: allUsers });
+        dispatch && dispatch({ type: FETCH_SUCCESS, payload: allUsers });
+        return allUsers;
       })
-      .catch((error) =>
+      .catch(
+        (error) =>
+          dispatch &&
+          dispatch({
+            type: FETCH_ERROR,
+            payload: { message: error.message, status: error.status },
+          })
+      );
+  };
+
+  const getGame = async (id: string) => {
+    dispatch && dispatch({ type: FETCH_INITIAL });
+    const gameRef = doc(db, GAMES, id);
+    const docSnap = await getDoc(gameRef);
+    if (docSnap.exists()) {
+      const game = docSnap.data();
+      dispatch && dispatch({ type: FETCH_SUCCESS, payload: game });
+      return game;
+    } else {
+      dispatch &&
         dispatch({
           type: FETCH_ERROR,
-          payload: { message: error.message, status: error.status },
-        })
-      );
-
-    return state;
-  };
-
-  const getUser = async (id: string) => {
-    dispatch({ type: FETCH_INITIAL });
-    const userRef = doc(db, USERS, id);
-    const docSnap = await getDoc(userRef);
-    if (docSnap.exists()) {
-      dispatch({ type: FETCH_SUCCESS, payload: docSnap.data() });
-    } else {
-      dispatch({
-        type: FETCH_ERROR,
-        payload: { message: "Not found", status: 500 },
-      });
+          payload: { message: "Not found", status: 500 },
+        });
     }
   };
-
   const getAllGames = async () => {
-    dispatch({ type: FETCH_INITIAL });
+    dispatch && dispatch({ type: FETCH_INITIAL });
     const gamesCollectionRef = collection(db, GAMES);
     getDocs(gamesCollectionRef)
       .then((response) => {
@@ -89,30 +108,30 @@ const useApiHook = (type: FETCH_FUNCTIONS, id?: string) => {
           ...doc.data(),
           id: doc.id,
         }));
-        dispatch({ type: FETCH_SUCCESS, payload: allUsers });
+        dispatch && dispatch({ type: FETCH_SUCCESS, payload: allUsers });
+        return allUsers;
       })
-      .catch((error) =>
-        dispatch({
-          type: FETCH_ERROR,
-          payload: { message: error.message, status: error.status },
-        })
+      .catch(
+        (error) =>
+          dispatch &&
+          dispatch({
+            type: FETCH_ERROR,
+            payload: { message: error.message, status: error.status },
+          })
       );
-    return state;
   };
 
-  const getGame = async (id: string) => {
-    dispatch({ type: FETCH_INITIAL });
-    const gameRef = doc(db, GAMES, id);
-    const docSnap = await getDoc(gameRef);
-    if (docSnap.exists()) {
-      dispatch({ type: FETCH_SUCCESS, payload: docSnap.data() });
-    } else {
-      dispatch({
-        type: FETCH_ERROR,
-        payload: { message: "Not found", status: 500 },
-      });
-    }
-  };
+  return { getUser, getAllUsers, getGame, getAllGames };
+};
+
+const useApiHook = (type: FETCH_FUNCTIONS, id?: string) => {
+  const [state, dispatch] = useReducer(dataReducer, {
+    isLoading: false,
+    isError: undefined,
+    data: undefined,
+  });
+  const { getUser, getAllUsers, getGame, getAllGames } =
+    useFetchFuntions(dispatch);
 
   useEffect(() => {
     if (id) {

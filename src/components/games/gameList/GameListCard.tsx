@@ -16,7 +16,7 @@ const GameListCard = ({ game }: GameListCardProps) => {
           <Link to={`/games/game/${game.id}`}>{game.name}</Link>
         </header>
         <section>
-         <ul>
+         <ul className="list-unstyled">
           <li>Leader: b3rg3t</li>
          </ul>
         </section>
